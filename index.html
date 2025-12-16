@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ABC Game Wallet</title>
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#0b0f1a;
+    color:#fff;
+}
+.hidden{display:none;}
+button{cursor:pointer}
+
+.login-box{
+    width:350px;
+    margin:120px auto;
+    background:#131a2a;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+}
+.logo{
+    font-size:40px;
+    font-weight:bold;
+    letter-spacing:4px;
+}
+input{
+    width:90%;
+    padding:10px;
+    margin:10px 0;
+    border:none;
+    border-radius:5px;
+}
+.login-btn{
+    width:95%;
+    padding:10px;
+    background:#1abc9c;
+    border:none;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+.dashboard{
+    display:flex;
+    height:100vh;
+}
+.left{
+    width:35%;
+    background:#12192b;
+    padding:20px;
+}
+.right{
+    width:65%;
+    padding:20px;
+}
+
+.security{
+    color:#00ff99;
+    font-weight:bold;
+}
+.account-box{
+    margin-top:20px;
+    background:#1a2238;
+    padding:15px;
+    border-radius:8px;
+}
+.dropdown{
+    display:none;
+    margin-top:10px;
+    background:#0f1629;
+    padding:10px;
+    border-radius:8px;
+}
+
+.burger{
+    text-align:right;
+    font-size:26px;
+}
+.menu{
+    display:none;
+    position:absolute;
+    right:20px;
+    background:#1a2238;
+    padding:10px;
+    border-radius:8px;
+}
+.menu div{
+    padding:8px;
+    border-bottom:1px solid #333;
+}
+.menu div:last-child{border:none}
+
+.card{
+    background:#1a2238;
+    padding:15px;
+    border-radius:8px;
+    margin-top:20px;
+}
+select,input[type=text]{
+    width:100%;
+    padding:8px;
+    margin-top:10px;
+}
+.next-btn{
+    margin-top:10px;
+    width:100%;
+    padding:10px;
+    background:#f1c40f;
+    border:none;
+}
+.home-btn{
+    background:#1abc9c;
+    border:none;
+    padding:10px;
+    width:100%;
+    margin-top:10px;
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage" class="login-box">
+    <div class="logo">ABC</div>
+    <h3>ABC Game Wallet</h3>
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+    <button class="login-btn" onclick="login()">Login</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="dashboard hidden">
+
+<div class="left">
+    <div class="security">✔ Account Safty+++<br>7 Layers by ABC</div>
+
+    <div class="account-box" onclick="toggleAccount()">
+        Account Number: ********6700
+        <div id="accountDrop" class="dropdown">
+            <p><b>Available Game Token:</b> $15,000.00</p>
+            <hr>
+            <p>$1,000.00 – Deposit<br>08 Dec 2025 – Monthly Compensation<br>Time: 10:32 AM</p>
+            <p>$1,000.00 – Deposit<br>13 Dec 2025 – Weekly Compensation<br>Time: 06:45 PM</p>
+            <p>$13,000.00 – Deposit<br>15 Dec 2025 – Lost Interest Compensation<br>Time: 01:18 PM</p>
+        </div>
+    </div>
+</div>
+
+<div class="right">
+    <div class="burger" onclick="toggleMenu()">☰</div>
+    <div id="menu" class="menu">
+        <div onclick="showEdit()">Edit Profile</div>
+        <div onclick="logout()">Sign Out</div>
+    </div>
+
+    <div id="addFunds" class="card">
+        <h3>➕ Add Funds</h3>
+        <select id="amount" onchange="checkOther()">
+            <option>Select Amount</option>
+            <option>1000+</option>
+            <option>5000+</option>
+            <option>10000+</option>
+            <option>Other</option>
+        </select>
+        <input id="otherAmount" class="hidden" placeholder="Enter amount">
+        <button class="next-btn" onclick="nextStep()">Next</button>
+    </div>
+
+    <div id="methodBox" class="card hidden">
+        <h3>Choose Deposit Method</h3>
+        <select id="method" onchange="cashPickup()">
+            <option>Select Method</option>
+            <option>Digital Move</option>
+            <option>BTC Move</option>
+            <option>Cash Deposit at FTC Headquarter</option>
+            <option>Cash Pickup at Doorstep (Recommended)</option>
+        </select>
+        <input id="address" class="hidden" placeholder="Enter Address">
+        <button class="next-btn" onclick="submitCash()">Submit</button>
+    </div>
+
+    <div id="success" class="card hidden">
+        <p>Your investigator would let you know the upcoming slots and secure password for cash pickup.</p>
+        <button class="home-btn" onclick="goHome()">Home</button>
+    </div>
+
+    <div id="editBox" class="card hidden">
+        <h3>Account Details</h3>
+        <p>Account Holder: Tsoni Hansen</p>
+        <p>Case Number: 778249</p>
+        <p>Investigator: Eric C Monti (Badge: Emc1978ftc)</p>
+        <p>Account No: 119867876700</p>
+        <p>Routing: 7867567890</p>
+        <p>IFSC: FFk0078967</p>
+        <p>Address: dhhdhdjdj dhdjjdjdjd dhhd</p>
+        <p>Phone: 488484</p>
+        <p>Email: dhhdhd@gmail.com</p>
+    </div>
+</div>
+</div>
+
+<script>
+function login(){
+    if(user.value==="Tsoni778249" && pass.value==="99987870"){
+        loginPage.classList.add("hidden");
+        dashboard.classList.remove("hidden");
+    }else{
+        alert("Invalid Login");
+    }
+}
+function logout(){
+    dashboard.classList.add("hidden");
+    loginPage.classList.remove("hidden");
+}
+function toggleAccount(){
+    accountDrop.style.display = accountDrop.style.display==="block"?"none":"block";
+}
+function toggleMenu(){
+    menu.style.display = menu.style.display==="block"?"none":"block";
+}
+function showEdit(){
+    editBox.classList.toggle("hidden");
+}
+function checkOther(){
+    otherAmount.classList.toggle("hidden", amount.value!=="Other");
+}
+function nextStep(){
+    methodBox.classList.remove("hidden");
+}
+function cashPickup(){
+    address.classList.toggle("hidden", !method.value.includes("Cash Pickup"));
+}
+function submitCash(){
+    methodBox.classList.add("hidden");
+    success.classList.remove("hidden");
+}
+function goHome(){
+    success.classList.add("hidden");
+}
+</script>
+
+</body>
+</html>
